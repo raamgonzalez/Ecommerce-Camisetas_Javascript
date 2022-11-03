@@ -200,32 +200,75 @@ function menu(opcionSeleccionada){
     }
 }
 
+
+//Sirve para activar menu
+
 // let salir = false;
 // while(!salir){
 //     preguntarOpcion();
 // }
 
 
+//Inicio document
 
 
-//Capturo div producto
 
+//Capturas DOM
 let products = document.getElementById("products");
-for(let camiseta of lote2022){
-    let newCamiseta = document.createElement("div");
-    newCamiseta.innerHTML = ` <article class="card" id="${camiseta.id}">
-                                    <h3 class="titleCard"> ${camiseta.equipo}</h3>
-                                    <img class="container__img" src="assets/${camiseta.imagen}" alt="${camiseta.equipo} de marca ${camiseta.marca}">
-                                    <div class="container__product">
-                                        <p class="container__product--p">${camiseta.marca}</p>
-                                        <p class="container__product--p">${camiseta.anio}</p>
-                                        <p class="container__product--p">${camiseta.talla}</p>
-                                        <p class="container__product--p">${camiseta.precio}</p>
-                                        <a class="container__btn-primary" href="" target="blank">Agregar al carrito</a>
-                                    </div>
-                                </article>`
-    products.appendChild(newCamiseta);
+let btnGuardarCamiseta = document.getElementById("guardarCamisetasBtn");
+
+//Camisetas en el DOM
+
+function mostrarCatalogo(lote){
+    products.innerHTML = ""
+    for(let camiseta of lote){
+        let newCamiseta = document.createElement("div");
+        newCamiseta.innerHTML = ` <article class="card" id="${camiseta.id}">
+                                        <h3 class="titleCard"> ${camiseta.equipo}</h3>
+                                        <img class="container__img" src="assets/${camiseta.imagen}" alt="${camiseta.equipo} de marca ${camiseta.marca}">
+                                        <div class="container__product">
+                                            <p class="container__product--p">${camiseta.marca}</p>
+                                            <p class="container__product--p">${camiseta.anio}</p>
+                                            <p class="container__product--p">${camiseta.talla}</p>
+                                            <p class="container__product--p">${camiseta.precio}</p>
+                                            <button class="container__btn-primary" id="btnAgregarCarrito">Agregar al carrito</button>
+                                        </div>
+                                    </article>`
+        products.appendChild(newCamiseta);
+    }
+}mostrarCatalogo(lote2022)
+
+
+
+//Nuevas camisetas
+function nuevaCamiseta(lote){
+    let inputAnio = document.getElementById("cAnio");
+    let inputMarca = document.getElementById("cMarca");
+    let inputEquipo = document.getElementById("cEquipo");
+    let inputTalle = document.getElementById("cTalle");
+    let inputColor = document.getElementById("cColor");
+    let inputPrecio = document.getElementById("cPrecio");
+    const camisetaCreada = new Camiseta(lote.length+1, inputAnio.value, inputMarca.value, inputEquipo.value, inputTalle.value, inputColor.value, inputPrecio.value, "camisetaTest.jpg");
+
+    lote.push(camisetaCreada);
+    console.log(lote)
+    inputAnio.value = ""
+    inputMarca.value = ""
+    inputEquipo.value = ""
+    inputTalle.value = ""
+    inputColor.value = ""
+    inputPrecio.value = ""
+
+    mostrarCatalogo(lote2022)
+    // form.reset();
 }
+
+btnGuardarCamiseta.addEventListener("click",() => {nuevaCamiseta(lote2022)})
+
+
+
+
+
 
 // constructor(id, anio, marca, equipo, talla, color, precio, imagen)
 
