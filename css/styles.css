@@ -1,0 +1,141 @@
+
+/*---------------------------------------
+                -RESET-
+---------------------------------------*/
+
+:root {
+    --color-primary: #ffffff;
+    --color-secundary: #449db9;
+    --color-black: rgb(47, 47, 47);
+    --color-button: #f4f4f4f4;
+}
+
+h1, h2, h3, p{
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    text-align: center;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    text-align: center;
+}
+
+body{
+    margin: 0;
+}
+
+/*---------------------------------------
+                -GLOBAL-
+---------------------------------------*/
+
+.wrapper{
+    margin: 0;
+    padding: 0;
+
+    width: 100vw;
+    height: 100%;
+    background-color: var(--color-primary)
+}
+
+/*---------------------------------------
+                -HEADER-
+---------------------------------------*/
+
+.header{
+    width: 80vw;
+    min-height: 80px;
+    margin: 0 auto;
+    padding: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 0.1em solid var(--color-black);
+}
+
+.header__ul{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.header__li{
+    padding: 0.5rem 2rem;
+}
+
+/*---------------------------------------
+                -MAIN-
+---------------------------------------*/
+
+.main {
+    margin: 0 auto;
+    width: 70vw;
+}
+
+.main__container{
+    margin: 3rem auto;
+
+    width: 70vw;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    gap: 2rem;
+}
+
+.card{
+    margin: 0;
+    border: 0.1rem solid var(--color-secundary) ;
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.container__img{
+    width: 400px;
+    height: auto;
+
+    image-orientation: center;
+    background-size: contain;
+}
+
+.container__product{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.container__btn-primary{
+    margin: 1rem auto;
+    padding: 1rem;
+
+    background-color: var(--color-button);
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+/*---------------------------------------
+                -FOOTER-
+---------------------------------------*/
+
+.footer{
+    width: 80vw;
+    min-height: 80px;
+    margin: 0 auto;
+    padding: 0;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    border-top: 0.1em solid var(--color-black);
+}
