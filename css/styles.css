@@ -54,20 +54,23 @@ body{
     padding: 0;
 
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-around; */
     align-items: center;
 
     border-bottom: 0.1em solid var(--color-black);
 }
 
 .header__ul{
+    margin: 0 auto;
+    padding: 0;
+
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
 .header__li{
-    padding: 0.5rem 2rem;
+    padding: 1.5rem;
 }
 
 /*---------------------------------------
@@ -79,6 +82,13 @@ body{
     width: 70vw;
 }
 
+/*FORM*/
+#display__form{
+    display: none;
+}
+
+
+/*PRODUCTS*/
 .main__container{
     margin: 3rem auto;
 
@@ -122,6 +132,7 @@ body{
     border-radius: 0.5em;
     cursor: pointer;
 }
+
 
 /*---------------------------------------
                 -FOOTER-

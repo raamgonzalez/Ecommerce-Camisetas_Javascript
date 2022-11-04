@@ -1,4 +1,8 @@
 
+
+//---------CLASES, FUNCTIONS Y CONDICIONALES----------//
+
+
 //Clave de administrador
 let claveAdmin = 1234; 
 
@@ -209,23 +213,34 @@ function menu(opcionSeleccionada){
 // }
 
 
-//Inicio document
 
-
+//---------DOM----------//
 
 //Capturas DOM
 let products = document.getElementById("products");
-let btnGuardarCamiseta = document.getElementById("guardarCamisetasBtn");
+let btnGuardarCamiseta = document.getElementById("btnGuardarCamisetas");
+let buscarCamiseta = document.getElementById("buscarCamiseta");
+let btnSalir = document.getElementById("salir");
 
-//Camisetas en el DOM
+//Styles del DOM
+document.getElementById("display__form").style.display = "none";
+document.getElementById("btnGuardarCamisetas").style.display = "none";
+document.getElementById("salir").style.display = "none";
 
+//Eventos DOM
+btnGuardarCamiseta.addEventListener("click",() => {nuevaCamiseta(lote2022)})
+buscarCamiseta.addEventListener("input",() => {console.log(buscarCamiseta.value)})
+btnSalir.addEventListener("click",() => {salir(true)})
+
+
+//Mostrar camisetas en el DOM
 function mostrarCatalogo(lote){
     products.innerHTML = ""
     for(let camiseta of lote){
         let newCamiseta = document.createElement("div");
         newCamiseta.innerHTML = ` <article class="card" id="${camiseta.id}">
                                         <h3 class="titleCard"> ${camiseta.equipo}</h3>
-                                        <img class="container__img" src="assets/${camiseta.imagen}" alt="${camiseta.equipo} de marca ${camiseta.marca}">
+                                        <img class="container__img" src="./assets/${camiseta.imagen}" alt="${camiseta.equipo} de marca ${camiseta.marca}">
                                         <div class="container__product">
                                             <p class="container__product--p">${camiseta.marca}</p>
                                             <p class="container__product--p">${camiseta.anio}</p>
@@ -239,7 +254,6 @@ function mostrarCatalogo(lote){
 }mostrarCatalogo(lote2022)
 
 
-
 //Nuevas camisetas
 function nuevaCamiseta(lote){
     let inputAnio = document.getElementById("cAnio");
@@ -248,36 +262,44 @@ function nuevaCamiseta(lote){
     let inputTalle = document.getElementById("cTalle");
     let inputColor = document.getElementById("cColor");
     let inputPrecio = document.getElementById("cPrecio");
-    const camisetaCreada = new Camiseta(lote.length+1, inputAnio.value, inputMarca.value, inputEquipo.value, inputTalle.value, inputColor.value, inputPrecio.value, "camisetaTest.jpg");
+    let camisetaCreada = new Camiseta(lote.length+1, inputAnio.value, inputMarca.value, inputEquipo.value, inputTalle.value, inputColor.value, inputPrecio.value, "camisetaTest.jpg");
 
     lote.push(camisetaCreada);
-    console.log(lote)
+    
+    mostrarCatalogo(lote); //Le saque el lote2022 para que se vea en el DOM
+    console.log(lote);
+    
     inputAnio.value = ""
     inputMarca.value = ""
     inputEquipo.value = ""
     inputTalle.value = ""
     inputColor.value = ""
     inputPrecio.value = ""
-
-    mostrarCatalogo(lote2022)
-    // form.reset();
 }
 
-btnGuardarCamiseta.addEventListener("click",() => {nuevaCamiseta(lote2022)})
+//Funcion Salir
+function salir(boolen){
+    if(boolen == true){
+        document.getElementById("display__form").style.display = "none";
+        document.getElementById("btnGuardarCamisetas").style.display = "none";
+        document.getElementById("salir").style.display = "none";
+    }else{
+        document.getElementById("display__form").style.display = "block";
+    }
+}
 
+//Funcion para clave de administrador
 
+//Mostrar y oculta carga de camisetas
+let btnPassCargarCamiseta = document.getElementById("btnPassCargarCamiseta"); 
+btnPassCargarCamiseta.addEventListener("click", () => {
+    let claveIngresada = parseInt(prompt("Ingrese clave de administrador para esta opción: "));
+    if(claveIngresada == claveAdmin ){
+        document.getElementById("display__form").style.display = "block";
+        document.getElementById("btnGuardarCamisetas").style.display = "block";
+        document.getElementById("salir").style.display = "block";
+    }else{
+        alert("Clave incorrecta, no se puede realizar la operación.");
+    }
+});
 
-
-
-
-// constructor(id, anio, marca, equipo, talla, color, precio, imagen)
-
-
-/*  <article class="container__card">
-        <img class="container__img" name="" src="" alt="">
-        <div class="container__product">
-            <p></p>
-            <p></p>
-            <a href="" target="blank">Ver más</a>
-            </div>
-    </article> */

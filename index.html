@@ -18,33 +18,43 @@
                 <li class="header__li"><a href="" class="header__a">Productos</a><a href=""></a></li>
                 <li class="header__li"><a href="" class="header__a">Contacto</a><a href=""></a></li>
             </ul>
+            <div class="header__search">
+                <input type="text" class="header__input" id="buscarCamiseta" placeholder="Buscar">
+                <button class="header__button"><i class="fas fa-search"></i></button>
+            </div>
         </header>
 
         <main class="main">
             <section class="main__section section">
-                <form class="section__form--create form" id="formElement" action="">
-                    <div class="formField">
-                        <label for="">Ingrese Equipo: </label>
+                <button id="btnPassCargarCamiseta">Cargar Camisetas</button>
+                <form class="section__form form" id="display__form">
+                    <div class="form__field">
+                        <label for="equipo">Ingrese Equipo: </label>
                         <input class="form__input" type="text" name="equipo" id="cEquipo" placeholder="Equipo">
                     </div>
-                        <label for="">Ingrese Marca: </label>
+                    <div class="form_field">
+                        <label for="marca">Ingrese Marca: </label>
                         <input class="form__input" type="text" name="marca" id="cMarca" placeholder="Marca">
-                    <div class="formField">
-                        <label for="">Ingrese Año </label>
+                    </div>
+                    <div class="form_field">
+                        <label for="anio">Ingrese Año </label>
                         <input class="form__input" type="text" name="anio" id="cAnio" placeholder="Año">
-                    <div class="formField">
-                        <label for="">Ingrese Talla: </label>
+                    </div>
+                    <div class="form_field">
+                        <label for="talle">Ingrese Talla: </label>
                         <input class="form__input" type="text" name="talle" id="cTalle" placeholder="Talle">
-                    <div class="formField">
-                        <label for="">Ingrese Color: </label>
+                    </div>
+                    <div class="form_field">
+                        <label for="color">Ingrese Color: </label>
                         <input class="form__input" type="text" name="color" id="cColor" placeholder="Color">
                     </div>
-                    <div class="formField">
-                        <label for="">Ingrese Precio: </label>
+                    <div class="form_field">
+                        <label for="precio">Ingrese Precio: </label>
                         <input class="form__input" type="number" name="precio" id="cPrecio" placeholder="Precio">
                     </div>
                 </form>
-                <button id="guardarCamisetasBtn">Guardar camiseta</button>
+                <button id="btnGuardarCamisetas">Guardar camiseta</button>
+                <button id="salir">Salir</button>
             </section>
             <section class="main__container container" id="products">
                 <!-- Aca van los productos, se encuentrane en script de JS -->
@@ -64,6 +74,6 @@
             </div>
     </footer>
     </div>
-    <script src="/js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
