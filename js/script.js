@@ -219,13 +219,15 @@ function menu(opcionSeleccionada){
 //Capturas DOM
 let products = document.getElementById("products");
 let btnGuardarCamiseta = document.getElementById("btnGuardarCamisetas");
+let btnCargarCamiseta = document.getElementById("btnCargarCamiseta"); 
 let buscarCamiseta = document.getElementById("buscarCamiseta");
 let btnSalir = document.getElementById("salir");
+let displayForm = document.getElementById("display__form");
 
 //Styles del DOM
-document.getElementById("display__form").style.display = "none";
-document.getElementById("btnGuardarCamisetas").style.display = "none";
-document.getElementById("salir").style.display = "none";
+displayForm.style.display = "none";
+btnGuardarCamiseta.style.display = "none";
+btnSalir.style.display = "none";
 
 //Eventos DOM
 btnGuardarCamiseta.addEventListener("click",() => {nuevaCamiseta(lote2022)})
@@ -233,14 +235,28 @@ buscarCamiseta.addEventListener("input",() => {console.log(buscarCamiseta.value)
 btnSalir.addEventListener("click",() => {salir(true)})
 
 
+
+
+//Funcion para clave de administrador
+function passAdmin(){
+    let pass = parseInt(prompt("Ingrese clave de administrador para esta opción: "));
+    if(pass == 1234){
+        return true
+    }else{
+        return false
+    }
+}
+
 //Mostrar camisetas en el DOM
 function mostrarCatalogo(lote){
     products.innerHTML = ""
     for(let camiseta of lote){
         let newCamiseta = document.createElement("div");
         newCamiseta.innerHTML = ` <article class="card" id="${camiseta.id}">
-                                        <h3 class="titleCard"> ${camiseta.equipo}</h3>
-                                        <img class="container__img" src="./assets/${camiseta.imagen}" alt="${camiseta.equipo} de marca ${camiseta.marca}">
+                                        <div class="container__title">
+                                            <h3 class="titleCard"> ${camiseta.equipo}</h3>
+                                            <img class="container__img" src="./assets/${camiseta.imagen}" alt="${camiseta.equipo} de marca ${camiseta.marca}">
+                                        </div>
                                         <div class="container__product">
                                             <p class="container__product--p">${camiseta.marca}</p>
                                             <p class="container__product--p">${camiseta.anio}</p>
@@ -253,6 +269,22 @@ function mostrarCatalogo(lote){
     }
 }mostrarCatalogo(lote2022)
 
+//Mostrar y oculta carga de camisetas
+btnCargarCamiseta.addEventListener("click", () => {
+    if(passAdmin() == true){
+        if (displayForm.style.display == "none"){
+            displayForm.style.display = "block";
+            btnGuardarCamiseta.style.display = "block";
+            btnSalir.style.display = "block";
+        }else{
+            document.getElementById("btnGuardarCamisetas").style.display = "none";
+            document.getElementById("salir").style.display = "none";
+            
+    }
+    }else{
+        alert("Clave incorrecta, no se puede realizar la operación.");
+    }
+});
 
 //Nuevas camisetas
 function nuevaCamiseta(lote){
@@ -288,18 +320,46 @@ function salir(boolen){
     }
 }
 
-//Funcion para clave de administrador
 
-//Mostrar y oculta carga de camisetas
-let btnPassCargarCamiseta = document.getElementById("btnPassCargarCamiseta"); 
-btnPassCargarCamiseta.addEventListener("click", () => {
-    let claveIngresada = parseInt(prompt("Ingrese clave de administrador para esta opción: "));
-    if(claveIngresada == claveAdmin ){
-        document.getElementById("display__form").style.display = "block";
-        document.getElementById("btnGuardarCamisetas").style.display = "block";
-        document.getElementById("salir").style.display = "block";
-    }else{
-        alert("Clave incorrecta, no se puede realizar la operación.");
-    }
-});
+
+
+//Storage Dark Mode
+let btnDarkMode = document.getElementById("btnDarkMode");
+let btnLightMode = document.getElementById("btnLightMode");
+let wrapper = document.getElementById("wrapper");
+let modoOscuro 
+
+
+//Condicional para saber si existe algo en el Storage --Primera vez
+if(localStorage.getItem("modoOscuro")){
+    modoOscuro = localStorage.getItem("modoOscuro");
+}else{
+    console.log("Entro por primera vez")
+    localStorage.setItem("modoOscuro", true);
+    modoOscuro = "true";
+}
+console.log(modoOscuro);
+
+//Funcion para cambiar de modo
+if(modoOscuro == "true"){
+    wrapper.classList.add("darkMode");
+}else{
+    wrapper.classList.remove("darkMode");
+}
+
+
+//Evento
+btnDarkMode.addEventListener("click",() => {
+    wrapper.classList.add("darkMode");
+    localStorage.setItem("modoOscuro", true)
+})
+
+btnLightMode.addEventListener("click",() => {
+    wrapper.classList.remove("darkMode");
+    localStorage.setItem("modoOscuro", false)
+})
+
+
+localStorage.setItem("lote2022", JSON.stringify(lote2022));
+
 
