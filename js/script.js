@@ -4,7 +4,7 @@
 
 
 //Clave de administrador
-let claveAdmin = 1234; 
+let claveAdmin = 1234;
 
 //Class constructora de Objetos
 
@@ -46,15 +46,6 @@ if(localStorage.getItem("lote")){
     localStorage.setItem("lote", JSON.stringify(lote2022));
 }
 
-
-// let productosEnCarrito = [];
-
-// if(localStorage.getItem("carrito")){
-//     productosEnCarrito = JSON.parse(localStorage.getItem("carrito"));
-// }else{
-//     localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
-// }
-
 let productosEnCarrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 
@@ -64,7 +55,7 @@ let productosEnCarrito = JSON.parse(localStorage.getItem("carrito")) || [];
 //Capturas DOM
 let products = document.getElementById("products");
 let btnGuardarCamiseta = document.getElementById("btnGuardarCamisetas");
-let btnCargarCamiseta = document.getElementById("btnCargarCamiseta"); 
+let btnCargarCamiseta = document.getElementById("btnCargarCamiseta");
 let buscarCamiseta = document.getElementById("buscarCamiseta");
 let btnSalir = document.getElementById("salir");
 let displayForm = document.getElementById("display__form");
@@ -72,13 +63,8 @@ let modalBody = document.getElementById("modal-body");
 let botonCarrito = document.getElementById("botonCarrito");
 let coincidencia = document.getElementById("coincidencia");
 let selectOrden = document.getElementById("selectOrden");
+let divCompra = document.getElementById("precioTotal")
 
-
-
-//Styles del DOM
-displayForm.style.display = "none";
-btnGuardarCamiseta.style.display = "none";
-btnSalir.style.display = "none";
 
 
 //Eventos DOM
@@ -86,11 +72,41 @@ btnGuardarCamiseta.addEventListener("click",() => {nuevaCamiseta(lote2022)})
 buscarCamiseta.addEventListener("input",() => {buscarInfo(buscarCamiseta.value, lote2022)})
 btnSalir.addEventListener("click",() => {salir(true)})
 botonCarrito.addEventListener("click", () => {cargarProductosCarrito(productosEnCarrito)});
-//------------Generar switch para diferencias opciones de ordenamiento------------//
+
+
+//Selector para ordenamiento de camisetas
 selectOrden.addEventListener("change", () => {
-    console.log(selectOrden.value)
+    if(selectOrden.value == 1){
+        ordenarMayorMenor(lote2022);
+    }else if(selectOrden.value == 2){
+        ordenarMenorMayor(lote2022);
+    }else if(selectOrden.value == 3){
+        ordenarAlfabeticamente(lote2022);
+    }else{
+        mostrarCatalogo(lote2022);
+    }
 })
 
+function ordenarMayorMenor(lote){
+    let mayorMenor = lote.slice();
+    mayorMenor.sort((a, b) => (b.precio - a.precio));
+    mostrarCatalogo(mayorMenor);
+}
+
+function ordenarMenorMayor(lote){
+    let menorMayor = lote.slice();
+    menorMayor.sort((a, b) => (a.precio - b.precio));
+    mostrarCatalogo(menorMayor);
+}
+
+function ordenarAlfabeticamente(lote){
+    let alfabeticamente = lote.slice();
+    alfabeticamente.sort((a, b) => {
+    if(a.equipo < b.equipo) return -1;
+    if(a.equipo > b.equipo) return 1;
+    return 0    
+})
+    mostrarCatalogo(alfabeticamente);};
 
 
 //Funcion para clave de administrador
@@ -100,21 +116,13 @@ function passAdmin(){
 }
 
 
-//Función Buscar info
+//Función de busqueda
 function buscarInfo(buscado, lote){
-    console.log(buscado)
     let busqueda = lote.filter(
-        (camiseta) => camiseta.equipo.toLowerCase().includes(buscado.toLowerCase()) || camiseta.marca.toLowerCase().includes(buscado.toLowerCase())
-    )
-    if(busqueda.length == 0){
-        coincidencia.innerHTML = ""
-        let nuevoDiv = document.createElement("div");
-        nuevoDiv.innerHTML = `<h2>No se encontraron resultados</h2>`;
-        coincidencia.appendChild(nuevoDiv);
-        mostrarCatalogo(lote);
-    }else{
-        mostrarCatalogo(busqueda)
-    }
+        (camiseta) => camiseta?.equipo.toLowerCase().includes(buscado.toLowerCase()) || camiseta?.marca.toLowerCase().includes(buscado.toLowerCase()))
+        busqueda.length == 0 ?
+        (coincidencia.innerHTML = `<h2 class="h2__result">No se encontraron resultados.</h2>`, mostrarCatalogo(lote))
+        : (coincidencia.innerHTML = "", mostrarCatalogo(busqueda))
 }
 
 
@@ -126,13 +134,14 @@ function mostrarCatalogo(lote){
         newCamiseta.innerHTML = ` <article class="card" id="${camiseta.id}">
                                         <div class="container__title">
                                             <h3 class="titleCard"> ${camiseta.equipo}</h3>
+                                            <hr>
                                             <img class="container__img" src="./assets/${camiseta.imagen}" alt="${camiseta.equipo} de marca ${camiseta.marca}">
                                         </div>
                                         <div class="container__product">
-                                            <p class="container__product--p">${camiseta.marca}</p>
-                                            <p class="container__product--p">${camiseta.anio}</p>
-                                            <p class="container__product--p">${camiseta.talla}</p>
-                                            <p class="container__product--p">${camiseta.precio}</p>
+                                            <p class="container__product--p">Marca:  ${camiseta.marca}</p>
+                                            <p class="container__product--p">Año:  ${camiseta.anio}</p>
+                                            <p class="container__product--p">Talle:  ${camiseta.talla}</p>
+                                            <p class="container__product--p">Precio: ${camiseta.precio}</p>
                                             <button class="container__btn-primary" id="btnAgregarCarrito${camiseta.id}">Agregar al carrito</button>
                                         </div>
                                     </article>`
@@ -147,8 +156,25 @@ function mostrarCatalogo(lote){
 function agregarAlCarrito(camiseta){
     productosEnCarrito.push(camiseta);
     localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
+
+    Toastify({
+        text: "Se agregó al carrito",
+        duration: 3000,
+        newWindow: true,
+        style: {
+            background: "#BB86FC",
+            borderRadius: "5px",
+        }
+    }).showToast();
 }
 
+//Function calcular total 
+function compraTotal(lote){
+    let acumulador = 0
+    acumulador = lote.reduce((acumulador, productoCarrito) => acumulador + productoCarrito.precio,0)
+    console.log(acumulador)
+    acumulador == 0 ? divCompra.innerHTML = `No hay productos en el casrrito`: divCompra.innerHTML = `EL total de su carrito es ${acumulador}`
+}
 
 //Function imprimir en el modal
 function cargarProductosCarrito(lote){
@@ -157,45 +183,39 @@ function cargarProductosCarrito(lote){
         modalBody.innerHTML += `<article class="card" id="productoCarrito${productoCarrito.id}">
                                     <div class="card__title">
                                         <h3 class="titleCard"> ${productoCarrito.equipo}</h3>
+                                        <hr>
                                         <img class="titleImg" src="./assets/${productoCarrito.imagen}" alt="${productoCarrito.equipo} de marca ${productoCarrito.marca}">
                                     </div>
                                         <div class="card__product">
-                                            <p class="card__product--p">${productoCarrito.marca}</p>
-                                            <p class="card__product--p">${productoCarrito.talla}</p>
-                                            <p class="card__product--p">${productoCarrito.precio}</p>
-                                            <button class= "btn btn-danger" id="botonEliminar${productoCarrito.id}"><i class="fas fa-trash-alt"></i></button>
+                                            <p class="card__product--p">Marca: ${productoCarrito.marca}</p>
+                                            <p class="card__product--p">Talle: ${productoCarrito.talla}</p>
+                                            <p class="card__product--p">Precio: ${productoCarrito.precio}</p>
                                         </div>
+                                    <button class= "btn btn-danger" id="botonEliminar${productoCarrito.id}"><i class="fas fa-trash-alt"></i></button>
                                 </article>`
     });
     lote.forEach((productoCarrito, indice) => {
         document.getElementById(`botonEliminar${productoCarrito.id}`).addEventListener("click", () => {
             let cardProducto = document.getElementById(`productoCarrito${productoCarrito.id}`)
             cardProducto.remove();
-            //Eliminamos del arra
+            //Eliminamos del array
             productosEnCarrito.splice(indice, 1);
             console.log(productosEnCarrito);
             //Eliminamos del storage
             localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
+            compraTotal(lote);
         })
     })
+    compraTotal(lote);
 }
 
 
 //Mostrar y oculta carga de camisetas
-btnCargarCamiseta.addEventListener("click", () => {
-    if(passAdmin() == true){
-        if (displayForm.style.display == "none"){
-            displayForm.style.display = "block";
-            btnGuardarCamiseta.style.display = "block";
-            btnSalir.style.display = "block";
-        }else{
-            document.getElementById("btnGuardarCamisetas").style.display = "none";
-            document.getElementById("salir").style.display = "none";
-    }
-    }else{
-        alert("Clave incorrecta, no se puede realizar la operación.");
-    }
-});
+//------------Necesito que no aparezca el modal si la clave es incorrecta--------------------------
+// btnCargarCamiseta.addEventListener("click", () => {
+//     passAdmin() == true ? alert("Bienvenido administrador") : alert("Clave incorrecta, no se puede realizar la operación.")
+// });
+
 
 
 //Nuevas camisetas
@@ -209,12 +229,12 @@ function nuevaCamiseta(lote){
     let camisetaCreada = new Camiseta(lote.length+1, inputAnio.value, inputMarca.value, inputEquipo.value, inputTalle.value, inputColor.value, parseInt(inputPrecio.value), "camisetaTest.jpg");
 
     lote.push(camisetaCreada);
-    
+
     //TANBIEN MODIFICAMOS ARRAY DEL STORAGE:
     localStorage.setItem("lote", JSON.stringify(lote));
-    mostrarCatalogo(lote); 
+    mostrarCatalogo(lote);
     console.log(lote);
-    
+
     inputAnio.value = ""
     inputMarca.value = ""
     inputEquipo.value = ""
@@ -222,27 +242,18 @@ function nuevaCamiseta(lote){
     inputColor.value = ""
     inputPrecio.value = ""
 
-    Toastify({
-
-        text: "Has guardado una camiseta",
-        className: "info",
-        gravity: "top", // `top` or `bottom`
-        duration: 3000
-        
-        }).showToast();
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        confirmButtonText: 'Continuar',
+        confirmButtonColor: '#BB86FC',
+        title: 'Has guardado una camiseta nueva',
+        text: '¡Gracias por tu aporte!',
+        showConfirmButton: true,
+        timer: 2000
+    })
 }
 
-
-//Funcion Salir
-function salir(boolen){
-    if(boolen == true){
-        document.getElementById("display__form").style.display = "none";
-        document.getElementById("btnGuardarCamisetas").style.display = "none";
-        document.getElementById("salir").style.display = "none";
-    }else{
-        document.getElementById("display__form").style.display = "block";
-    }
-}
 
 
 
