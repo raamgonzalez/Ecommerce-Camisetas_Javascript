@@ -12,6 +12,7 @@
     --color-button: #f8f8f8;
     --color-text: #f8f8f8;
     font-family: 'Montserrat', sans-serif;
+    box-sizing: content-box;
 }
 
 h1, h2, h3, p{
@@ -19,6 +20,8 @@ h1, h2, h3, p{
     padding: 0;
     display: inline-block;
     text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
     /* color: var(--color-black) */
 }
 
@@ -43,7 +46,12 @@ hr{
     display: inline-block;
 }
 
-
+.main__container>div{
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
 
 
 /*---------------------------------------
@@ -114,6 +122,10 @@ hr{
 
 .header__li{
     padding: 1.5rem;
+}
+
+.header__a{
+    color: #024aa8;
 }
 
 .header__search{
@@ -194,29 +206,35 @@ hr{
 
 .main__container{
     padding: 0;
-    margin: 3rem auto;
+    margin: 1rem auto;
 
 
-    width: 70vw;
+    width: 100%;
 
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
 
+
+
     /* display: flex;
     flex-flow: row wrap;
     justify-content: flex-start; */
+}
 
+.main__container > div{
+    padding: 0;
+    margin: 0;
 }
 
 .card{
-    padding: 0;
-    margin: 0 auto;
+    /* padding: 0;
+    margin: 0 auto; */
     border: 0.1rem solid var(--color-secundary) ;
     border-radius: 20px;
     box-shadow: 9px 16px 15px -3px rgba(82, 82, 82, 0.1);
-    /* width: 100%; */
+    width: 100%;
     color: #121212;
     font-weight: 500;
 
@@ -326,3 +344,19 @@ hr{
     border-top: 0.1em solid var(--color-black);
 }
 
+.footer__h3--title{
+    font-size: 1.2rem;
+}
+
+.footer__h4--copyright{
+    font-size: 1.2rem;
+}
+
+.footer__socialnetwork{
+    font-size: 1.3rem;
+}
+
+.footer__a--socialnetwork{
+    padding: 0.2rem;
+    color: #121212;
+}

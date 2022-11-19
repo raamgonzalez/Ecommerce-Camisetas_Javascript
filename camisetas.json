@@ -1,0 +1,92 @@
+[
+    {
+        "id" : 1,
+        "anio" : 2022,
+        "marca" : "Nike",
+        "equipo" : "River Plate",
+        "talla" : "L",
+        "color" : "Rojo",
+        "precio" : 7000,
+        "imagen" : "camisetaRiver2022.jpg"
+    },
+    {
+        "id" : 2,
+        "anio" : 2020,
+        "marca" : "Adidas",
+        "equipo" : "River Plate",
+        "talla" : "M",
+        "color" : "Rojo y blanco",
+        "precio" : 3000,
+        "imagen" : "camisetaRiver2020.jpg"
+    },
+    {
+        "id" : 3,
+        "anio" : 2022,
+        "marca" : "Adidas",
+        "equipo" : "Boca Juniors",
+        "talla" : "L",
+        "color" : "Azul y Oro",
+        "precio" : 8000,
+        "imagen" : "camisetaBoca2022.jpg"
+    },
+    {
+        "id" : 4,
+        "anio" : 2019,
+        "marca" : "Adidas",
+        "equipo" : "Boca Juniors",
+        "talla" : "S",
+        "color" : "Azul",
+        "precio" : 3500,
+        "imagen" : "camisetaBoca2019.jpg"
+    },
+    {
+        "id": 5,
+        "anio" : 2018,
+        "marca" : "Kappa",
+        "equipo" : "Racing Club",
+        "talla" : "XL",
+        "color" : "Celeste y Blanco",   
+        "precio" : 4000,
+        "imagen" : "camisetaRacing2018.jpg"
+    },
+    {
+        "id" : 6,
+        "anio" : 2020,  
+        "marca" : "Kappa",
+        "equipo" : "Racing Club",
+        "talla" : "L",
+        "color" : "Celeste y Blanco",
+        "precio" : 5000,
+        "imagen" : "camisetaRacing2020.jpg"
+    },
+    {
+        "id" : 7,
+        "anio" : 2020,
+        "marca" : "Puma",
+        "equipo" : "Independiente",
+        "talla" : "XL",
+        "color" : "Rojo",
+        "precio" : 6000,
+        "imagen" : "camisetaIndependiente2020.jpg"
+    },
+    {
+        "id" : 8,
+        "anio" : 2021,
+        "marca" : "Puma",
+        "equipo" : "Independiente",
+        "talla" : "XS",
+        "color" : "Rojo",
+        "precio" : 4320,
+        "imagen" : "camisetaIndependiente2021.jpg"
+    },
+    {
+        "id" : 9,
+        "anio" : 2022,
+        "marca" : "Nike",
+        "equipo" : "San Lorenzo",
+        "talla" : "L",
+        "color" : "Rojo y Blanco",
+        "precio" : 7000,
+        "imagen" : "camisetaSanLorenzo2022.jpg"
+    }
+]
