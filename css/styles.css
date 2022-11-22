@@ -38,6 +38,8 @@ a, .header__a{
 
 body{
     margin: 0;
+    /* width: 100%;
+    height: 100%; */
 }
 
 hr{
@@ -62,7 +64,7 @@ hr{
     margin: 0;
     padding: 0;
 
-    width: 100vw;
+    width: 100%;
     height: 100%;
     
 
@@ -78,6 +80,9 @@ hr{
     color: #BB86FC;
 }
 
+#btnLightMode{
+    margin: 0;
+}
 /*---------------------------------------
                 -HEADER-
 ---------------------------------------*/
@@ -93,10 +98,6 @@ hr{
     align-items: center;
 
     border-bottom: 0.1em solid var(--color-black);
-}
-
-.header__btn{
-    margin-right: 1rem;
 }
 
 .btn-mode{
@@ -278,6 +279,12 @@ hr{
     border-radius: 0.5em;
     border: 1px solid  #7b7b7b ;
     cursor: pointer;
+    transition: 0.3s;
+}
+
+.container__btn-primary:hover{
+    background-color: #BB86FC;
+    color: #f8f8f8;
 }
 
 /*MODAL CARRITO*/
@@ -319,6 +326,14 @@ hr{
 
 #idModalAgregarCamiseta{
     color: #121212;
+}
+
+#btnGuardarCamisetas:hover{
+    background-color: #CFDEF3;
+}
+
+#salir:hover{
+    background-color: rgba(251, 42, 5, 0.689);
 }
 
 .h2__result{
