@@ -133,6 +133,14 @@ hr{
     margin:0 2rem;
 }
 
+#botonCarrito:hover{
+    color: aquamarine;
+}
+
+#buscarCamiseta{
+    padding: 0.1rem;
+}
+
 /*---------------------------------------
                 -MAIN-
 ---------------------------------------*/
@@ -287,6 +295,10 @@ hr{
     color: #f8f8f8;
 }
 
+.ofertaColor{
+    color: tomato;
+}
+
 /*MODAL CARRITO*/
 
 #modal-body{
@@ -373,5 +385,4 @@ hr{
 
 .footer__a--socialnetwork{
     padding: 0.2rem;
-    color: #121212;
 }

@@ -1,7 +1,5 @@
 
-
 //---------CLASES, FUNCTIONS Y CONDICIONALES----------//
-
 
 //Clave de administrador
 let claveAdmin = 1234;
@@ -52,7 +50,7 @@ if(localStorage.getItem("lote")){
 let productosEnCarrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 
-//---------DOM----------//
+
 
 //Luxon
 const DateTime = luxon.DateTime
@@ -135,6 +133,7 @@ function nuevaCamiseta(lote){
     })
 }
 
+
 //Funcion agregar a carrito - DOM y LocalStorage
 function agregarAlCarrito(camiseta){
     let libroAgregado = productosEnCarrito.find((element) => element.id == camiseta.id);
@@ -144,7 +143,7 @@ function agregarAlCarrito(camiseta){
 
         Toastify({
             text: "Se agregó al carrito",
-            duration: 3000,
+            duration: 2000,
             newWindow: true,
             style: {
                 background: "#BB86FC",
@@ -154,7 +153,7 @@ function agregarAlCarrito(camiseta){
     }else{
         Toastify({
             text: "La camiseta ya existe en el carrito",
-            duration: 3000,
+            duration: 2000,
             newWindow: true,
             style: {
                 background: "#F78E69",
@@ -163,6 +162,52 @@ function agregarAlCarrito(camiseta){
         }).showToast();
     }
     
+}
+
+
+//Function imprimir en el modal
+function cargarProductosCarrito(lote){
+    modalBody.innerHTML = ""
+    lote.forEach((productoCarrito) => {
+        modalBody.innerHTML += `<article class="card" id="productoCarrito${productoCarrito.id}">
+                                    <div class="card__title">
+                                        <h3 class="titleCard"> ${productoCarrito.equipo}</h3>
+                                        <hr>
+                                        <img class="titleImg" src="./assets/${productoCarrito.imagen}" alt="${productoCarrito.equipo} de marca ${productoCarrito.marca}">
+                                    </div>
+                                        <div class="card__product">
+                                            <p class="card__product--p">Marca: ${productoCarrito.marca}</p>
+                                            <p class="card__product--p">Talle: ${productoCarrito.talla}</p>
+                                            <p class="card__product--p">Precio: ${productoCarrito.precio}</p>
+                                        </div>
+                                    <button class= "btn btn-danger" id="botonEliminar${productoCarrito.id}"><i class="fas fa-trash-alt"></i></button>
+                                </article>`
+    });
+    lote.forEach((productoCarrito, indice) => {
+        document.getElementById(`botonEliminar${productoCarrito.id}`).addEventListener("click", () => {
+            let cardProducto = document.getElementById(`productoCarrito${productoCarrito.id}`)
+            cardProducto.remove();
+            //Eliminamos del array
+            let productoEliminar = lote.find(camiseta => camiseta.id == productoCarrito.id);
+            let posicion = lote.indexOf(productoEliminar)
+            lote.splice(posicion, 1);
+
+            console.log(productosEnCarrito);
+            //Eliminamos del storage
+            localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
+            compraTotal(lote);
+        })
+    })
+    compraTotal(lote);
+}
+
+//Function calcular total 
+function compraTotal(lote){
+    let acumulador = 0
+    acumulador = lote.reduce((acc, productoCarrito) => acc += productoCarrito.precio,0)
+    console.log(acumulador)
+    acumulador == 0 ? divCompra.innerHTML = `No hay productos en el carrito`: divCompra.innerHTML = `EL total de su carrito es ${acumulador}`
+    return acumulador
 }
 
 
@@ -214,7 +259,7 @@ function mostrarCatalogo(lote){
                                             <p class="container__product--p">Marca:  ${camiseta.marca}</p>
                                             <p class="container__product--p">Año:  ${camiseta.anio}</p>
                                             <p class="container__product--p">Talle:  ${camiseta.talla}</p>
-                                            <p class="container__product--p">Precio: ${camiseta.precio}</p>
+                                            <p class="container__product--p ${camiseta.precio <= 5000 ? "ofertaColor" : "precioBase"}">Precio: ${camiseta.precio} ${camiseta.precio <= 5000 ? "OFERTA!" : ""}</p>
                                             <button class="container__btn-primary" id="btnAgregarCarrito${camiseta.id}">Agregar al carrito</button>
                                         </div>
                                     </article>`
@@ -222,53 +267,6 @@ function mostrarCatalogo(lote){
         let btnAgregarCarrito = document.getElementById(`btnAgregarCarrito${camiseta.id}`);
         btnAgregarCarrito.addEventListener("click",() => {agregarAlCarrito(camiseta)});
     }
-}
-
-
-//Function imprimir en el modal
-function cargarProductosCarrito(lote){
-    modalBody.innerHTML = ""
-    lote.forEach((productoCarrito) => {
-        modalBody.innerHTML += `<article class="card" id="productoCarrito${productoCarrito.id}">
-                                    <div class="card__title">
-                                        <h3 class="titleCard"> ${productoCarrito.equipo}</h3>
-                                        <hr>
-                                        <img class="titleImg" src="./assets/${productoCarrito.imagen}" alt="${productoCarrito.equipo} de marca ${productoCarrito.marca}">
-                                    </div>
-                                        <div class="card__product">
-                                            <p class="card__product--p">Marca: ${productoCarrito.marca}</p>
-                                            <p class="card__product--p">Talle: ${productoCarrito.talla}</p>
-                                            <p class="card__product--p">Precio: ${productoCarrito.precio}</p>
-                                        </div>
-                                    <button class= "btn btn-danger" id="botonEliminar${productoCarrito.id}"><i class="fas fa-trash-alt"></i></button>
-                                </article>`
-    });
-    lote.forEach((productoCarrito, indice) => {
-        document.getElementById(`botonEliminar${productoCarrito.id}`).addEventListener("click", () => {
-            let cardProducto = document.getElementById(`productoCarrito${productoCarrito.id}`)
-            cardProducto.remove();
-            //Eliminamos del array
-            let productoEliminar = lote.find(camiseta => camiseta.id == productoCarrito.id);
-            let posicion = lote.indexOf(productoEliminar)
-            lote.splice(posicion, 1);
-
-            console.log(productosEnCarrito);
-            //Eliminamos del storage
-            localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
-            compraTotal(lote);
-        })
-    })
-    compraTotal(lote);
-}
-
-
-//Function calcular total 
-function compraTotal(lote){
-    let acumulador = 0
-    acumulador = lote.reduce((acumulador, productoCarrito) => acumulador + productoCarrito.precio,0);
-    console.log(acumulador)
-    acumulador == 0 ? divCompra.innerHTML = `No hay productos en el carrito`: divCompra.innerHTML = `EL total de su carrito es ${acumulador}`
-    // return acumulador
 }
 
 
@@ -283,16 +281,16 @@ function FinalizarCompra(lote){
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
     }).then((result) => {
-        if (result.isConfirmed) {
-            // let totalFinal = compraTotal()
+        if(result.isConfirmed) {
+            let totalFinal = compraTotal(lote)
             Swal.fire({
                 title: 'Compra realizada con éxito',
                 icon: 'success',
                 confirmButtonColor: '#3085d6',
-                text: `Gracias por su compra. El total de su compra es "FALTA AGREGAR PRECIO TOTAL" y se ha realizado el dia ${fecha}`
+                text: `Gracias por su compra. El total de su compra es ${totalFinal} y se ha realizado el dia ${fecha}`
             })
-            localStorage.removeItem("carrito");
             productosEnCarrito = [];
+            localStorage.removeItem("carrito");
             }else{
                 Swal.fire({
                     title: 'Compra cancelada',
@@ -303,13 +301,6 @@ function FinalizarCompra(lote){
                 })
             }
         })
-}
-
-
-//Funcion para clave de administrador
-function passAdmin(){
-    let pass = parseInt(prompt("Ingrese clave de administrador para esta opción: "));
-    return pass == 1234
 }
 
 
@@ -329,10 +320,9 @@ setTimeout(()=>{
 // });
 
 
+//CORREGIR QUE MUESTRE VALOR DE COMPRA TOTAL //REVISAR
+//ELIMINAR
 
-//AGREGAR SPINNER CON setTimeOut
-//CORREGIR QUE MUESTRE VALOR DE COMPRA TOTAL
-//AGREGAR MODIFICADOR DE CLASSNAME para cambiar color al precio de los productos
 
 
 

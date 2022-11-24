@@ -1,0 +1,25 @@
+{
+  "name": "proyectofinal-gonzalez",
+  "version": "1.0.0",
+  "description": "Creación de un simulador interactivo para una web de camisetas, propuesta realizada para el curso de JavaScript de CoderHouse.-",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raamgonzalez/simuladorInteractivo__GonzalezRamses.git"
+  },
+  "author": "Ramsés González",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raamgonzalez/simuladorInteractivo__GonzalezRamses/issues"
+  },
+  "homepage": "https://github.com/raamgonzalez/simuladorInteractivo__GonzalezRamses#readme",
+  "dependencies": {
+    "luxon": "^3.1.0",
+    "sweetalert2": "^11.6.13",
+    "toastify-js": "^1.12.0"
+  }
+}  
