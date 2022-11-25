@@ -29,22 +29,23 @@
                 <li class="header__li"><a href="" class="header__a">Contacto</a><a href=""></a></li> -->
             </ul>
             <div class="header__btn">
-                <button class="btn-mode" id="btnDarkMode">Dark</button>
-                <button class="btn-mode" id="btnLightMode">Light</button>
+                <button class="button btn-mode" id="btnDarkMode">Dark</button>
+                <button class="button btn-mode" id="btnLightMode">Light</button>
             </div>
             <div class="header__search">
                 <input type="text" class="header__input" id="buscarCamiseta" placeholder="Buscar">
-                <button class="header__button"><i class="fas fa-search"></i></button>
+                <button class="button header__button"><i class="fas fa-search"></i></button>
             </div>  
             <div class="header__shop">
-                <a id="botonCarrito" data-bs-toggle="modal" data-bs-target="#idModal" class="btn btn-secondary"><i class="fas fa-shopping-cart fa-1x"></i></a>
+                <a id="botonCarrito" data-bs-toggle="modal" data-bs-target="#idModal" class="button btn btn-secondary"><i class="fas fa-shopping-cart fa-1x"></i></a>
             </div>
         </header>
 
         <main class="main">
             <section class="main__section section">
-                <button class="section__btn" id="btnCargarCamiseta" data-bs-toggle="modal" data-bs-target="#idModalAgregarCamiseta">Cargar Camisetas</button>
+                <button class="button section__btn" id="btnCargarCamiseta" data-bs-toggle="modal" data-bs-target="#idContrasenia">Cargar Camisetas</button>
                 <ul>
+                    <!--#idModalAgregarCamiseta-->
                     <select id="selectOrden" class="form-select form-select-sm" aria-label=".form-select-sm example">
                         <option selected>Ordenar por:</option>
                         <option value="1">Mayor a menor</option>
@@ -85,21 +86,47 @@
             <div class="modal-content" id="modalContent__Carrito">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Carrito de Compras</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="button btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modal-body"></div>
                 <div class="row ml-ato">
                     <p id="precioTotal"></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" data-bs-dismiss="modal" class="btn btn-success" id="botonFinalizarCompra">Finalizar Compra</button>
+                    <button type="button" class="button btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" data-bs-dismiss="modal" class="button btn btn-success" id="botonFinalizarCompra">Finalizar Compra</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--MODAL CONTRASEÑA-->
+    <div class="modal fade" id="idContrasenia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Administrador</h5>
+                    <button type="button" class="button btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalForm">
+                    <form class="section__form form" id="display__contrasenia">
+                        <form class="section__form form" id="clave__form"></form>
+                        <div class="form__field">
+                            <label class="form__label" for="clave">Ingrese clave: </label>
+                            <input class="form__input" type="password" name="clave" id="cClave" placeholder="Clave">
+                            <div class="button__center">
+                                <button class="button section__btn" id="btnCargarContrasenia" data-bs-toggle="modal" data-bs-target="#idModalAgregarCamiseta">Ingresar</button>
+                            </div>
+                        </div>
+                    </form>
+                    </form>
+                </div>
+                <div class="row ml-ato">
                 </div>
             </div>
         </div>
     </div>
     <!--MODAL BOOTSTRAP CARGAR CAMISETA-->
-    <div class="modal fade" id="idModalAgregarCamiseta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="idModalAgregarCamiseta" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" id="modal-content">
                 <div class="modal-header">
@@ -137,10 +164,8 @@
                 <div class="row ml-ato">
                 </div>
                 <div class="modal-footer">
-                        <button type="button" data-bs-dismiss="modal" class="form__btn" id="btnGuardarCamisetas">Guardar camiseta</button>
-                        <button type="button" data-bs-dismiss="modal" class="form__btn" id="salir">Salir</button>
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" data-bs-dismiss="modal" class="btn btn-success" id="botonFinalizarCompra">Cargar</button> -->
+                        <button type="button" data-bs-dismiss="modal" class="button form__btn" id="btnGuardarCamisetas">Guardar camiseta</button>
+                        <button type="button" data-bs-dismiss="modal" class="button form__btn" id="salir">Salir</button>
                 </div>
             </div>
         </div>

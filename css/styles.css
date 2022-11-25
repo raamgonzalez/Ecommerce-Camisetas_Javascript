@@ -56,6 +56,8 @@ hr{
 }
 
 
+
+
 /*---------------------------------------
                 -GLOBAL-
 ---------------------------------------*/
@@ -353,6 +355,27 @@ hr{
     margin: 0 auto;
 }
 
+/*MODAL CLAVE*/
+#idContrasenia{
+    color: #121212;
+}
+
+.button__center{
+    margin: 0 auto;
+    text-align: left;
+}
+
+#btnCargarContrasenia{
+    background-color: var(--color-button);
+    padding: 0.5rem 1rem;
+    margin: 0.5rem auto;
+}
+
+#btnCargarContrasenia:hover{
+    background-color: #BB86FC;
+    color: #f8f8f8;
+}
+
 
 /*---------------------------------------
                 -FOOTER-
@@ -385,4 +408,8 @@ hr{
 
 .footer__a--socialnetwork{
     padding: 0.2rem;
+}
+
+.button{
+    border: 0.5px solid #616161;
 }

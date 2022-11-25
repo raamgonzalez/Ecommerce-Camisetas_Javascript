@@ -1,11 +1,10 @@
 
-//---------CLASES, FUNCTIONS Y CONDICIONALES----------//
+//-----------------------------------Tienda de camisetas-------------------------------------------//
 
 //Clave de administrador
 let claveAdmin = 1234;
 
 //Class constructora de Objetos
-
 class Camiseta{
     constructor(id, anio, marca, equipo, talla, color, precio, imagen){
         this.id = id;
@@ -50,14 +49,13 @@ if(localStorage.getItem("lote")){
 let productosEnCarrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 
-
-
 //Luxon
 const DateTime = luxon.DateTime
 const fechaHoy = DateTime.now()
 let divFechaHoy = document.getElementById("fechaHoy")
 let fecha = fechaHoy.toLocaleString(DateTime.DATE_FULL)
 divFechaHoy.innerHTML = `${fecha}`
+
 
 //Capturas DOM
 let products = document.getElementById("products");
@@ -74,6 +72,9 @@ let divCompra = document.getElementById("precioTotal")
 let botonFinalizarCompra = document.getElementById("botonFinalizarCompra");
 let loaderTexto = document.getElementById("loaderTexto");
 let loader = document.getElementById("loader");
+let cClave = document.getElementById("cClave");
+let btnCargarContrasenia = document.getElementById("btnCargarContrasenia");
+let idModalAgregarCamiseta = document.getElementById("idModalAgregarCamiseta");
 
 
 //Eventos DOM
@@ -93,44 +94,97 @@ selectOrden.addEventListener("change", () => {
     }
 })
 botonFinalizarCompra.addEventListener("click", () => {
-    FinalizarCompra();
+    finalizarCompra();
 })
+btnCargarContrasenia.addEventListener("click", () => {ingresoAdmin()});
 
+
+function ingresoAdmin(){
+    let clave = cClave.value;
+    if(clave == claveAdmin){
+        Toastify({
+            text: "Has ingresado como administrador",
+            duration: 2000,
+            newWindow: true,
+            style: {
+                background: "#BB86FC",
+                borderRadius: "5px",
+            }
+        }).showToast();
+        console.log("Ingreso correcto")
+        displayForm.style.display = "block";
+        return true
+    }else{
+        displayForm.style.display = "none";
+        console.log("Ingreso incorrecto")
+        Toastify({
+            text: "Clave incorrecta, no podras cargar camisetas",
+            duration: 2000,
+            newWindow: true,
+            style: {
+                background: "#F78E69",
+                borderRadius: "5px",
+            }
+        }).showToast();
+        return false
+    }
+}
+
+function compraTotal(lote){
+    let acumulador = 0
+    acumulador = lote.reduce((acc, productoCarrito) => acc + productoCarrito.precio,0)
+    console.log(acumulador)
+    acumulador == 0 ? divCompra.innerHTML = `No hay productos en el carrito`: divCompra.innerHTML = `EL total de su carrito es ${acumulador}`
+    return acumulador
+}
 
 //Nuevas camisetas
 function nuevaCamiseta(lote){
-    let inputAnio = document.getElementById("cAnio");
-    let inputMarca = document.getElementById("cMarca");
-    let inputEquipo = document.getElementById("cEquipo");
-    let inputTalle = document.getElementById("cTalle");
-    let inputColor = document.getElementById("cColor");
-    let inputPrecio = document.getElementById("cPrecio");
-    let camisetaCreada = new Camiseta(lote.length+1, inputAnio.value, inputMarca.value, inputEquipo.value, inputTalle.value, inputColor.value, parseInt(inputPrecio.value), "camisetaTest.jpg");
+    if(ingresoAdmin()){
+        let inputAnio = document.getElementById("cAnio");
+        let inputMarca = document.getElementById("cMarca");
+        let inputEquipo = document.getElementById("cEquipo");
+        let inputTalle = document.getElementById("cTalle");
+        let inputColor = document.getElementById("cColor");
+        let inputPrecio = document.getElementById("cPrecio");
+        let camisetaCreada = new Camiseta(lote.length+1, inputAnio.value, inputMarca.value, inputEquipo.value, inputTalle.value, inputColor.value, parseInt(inputPrecio.value), "camisetaTest.jpg");
 
-    lote.push(camisetaCreada);
+        lote.push(camisetaCreada);
 
-    //Se modifica array del storage
-    localStorage.setItem("lote", JSON.stringify(lote));
-    mostrarCatalogo(lote);
-    console.log(lote);
+        //Se modifica array del storage
+        localStorage.setItem("lote", JSON.stringify(lote));
+        mostrarCatalogo(lote);
+        console.log(lote);
 
-    inputAnio.value = ""
-    inputMarca.value = ""
-    inputEquipo.value = ""
-    inputTalle.value = ""
-    inputColor.value = ""
-    inputPrecio.value = ""
+        inputAnio.value = ""
+        inputMarca.value = ""
+        inputEquipo.value = ""
+        inputTalle.value = ""
+        inputColor.value = ""
+        inputPrecio.value = ""
 
-    Swal.fire({
-        position: 'center',
-        icon: 'success',
-        confirmButtonText: 'Continuar',
-        confirmButtonColor: '#BB86FC',
-        title: 'Has guardado una camiseta nueva',
-        text: '¡Gracias por tu aporte!',
-        showConfirmButton: true,
-        timer: 2000
-    })
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            confirmButtonText: 'Continuar',
+            confirmButtonColor: '#BB86FC',
+            title: 'Has guardado una camiseta nueva',
+            text: '¡Gracias por tu aporte!',
+            showConfirmButton: true,
+            timer: 2000
+        })
+        }else{
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                confirmButtonText: 'Continuar',
+                confirmButtonColor: '#BB86FC',
+                title: 'No se ha podido guardar la camiseta',
+                text: '¡Clave incorrecta!',
+                showConfirmButton: true,
+                timer: 2000
+            })
+        }
 }
 
 
@@ -201,15 +255,6 @@ function cargarProductosCarrito(lote){
     compraTotal(lote);
 }
 
-//Function calcular total 
-function compraTotal(lote){
-    let acumulador = 0
-    acumulador = lote.reduce((acc, productoCarrito) => acc += productoCarrito.precio,0)
-    console.log(acumulador)
-    acumulador == 0 ? divCompra.innerHTML = `No hay productos en el carrito`: divCompra.innerHTML = `EL total de su carrito es ${acumulador}`
-    return acumulador
-}
-
 
 //Selector para ordenamiento de camisetas
 function ordenarMayorMenor(lote){
@@ -271,7 +316,7 @@ function mostrarCatalogo(lote){
 
 
 //Finalizar compra
-function FinalizarCompra(lote){
+function finalizarCompra(lote){
     Swal.fire({
         title: '¿Está seguro de finalizar la compra?',
         icon: 'info',
@@ -279,9 +324,9 @@ function FinalizarCompra(lote){
         confirmButtonText: 'Sí',
         cancelButtonText: 'No',
         confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-    }).then((result) => {
-        if(result.isConfirmed) {
+        cancelButtonColor: '#F78E69',
+    }).then((result)=>{
+        if(result.isConfirmed){
             let totalFinal = compraTotal(lote)
             Swal.fire({
                 title: 'Compra realizada con éxito',
@@ -304,13 +349,14 @@ function FinalizarCompra(lote){
 }
 
 
+
 //Inicio
 setTimeout(()=>{
     loader.remove();
     loaderTexto.remove();
     mostrarCatalogo(lote2022)
 
-}, 3000)
+}, 1000)
 
 
 //Mostrar y oculta carga de camisetas
