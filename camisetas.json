@@ -2,8 +2,8 @@
     {
         "id" : 1,
         "anio" : 2022,
-        "marca" : "Adidas",
         "equipo" : "River Plate",
+        "marca" : "Adidas",
         "talla" : "L",
         "color" : "Rojo",
         "precio" : 7000,
@@ -12,8 +12,8 @@
     {
         "id" : 2,
         "anio" : 2020,
-        "marca" : "Adidas",
         "equipo" : "River Plate",
+        "marca" : "Adidas",
         "talla" : "M",
         "color" : "Rojo y blanco",
         "precio" : 3000,
@@ -22,8 +22,8 @@
     {
         "id" : 3,
         "anio" : 2022,
-        "marca" : "Adidas",
         "equipo" : "Boca Juniors",
+        "marca" : "Adidas",
         "talla" : "L",
         "color" : "Azul y Oro",
         "precio" : 8000,
@@ -32,8 +32,8 @@
     {
         "id" : 4,
         "anio" : 2019,
-        "marca" : "Adidas",
         "equipo" : "Boca Juniors",
+        "marca" : "Adidas",
         "talla" : "S",
         "color" : "Azul",
         "precio" : 3500,
@@ -42,8 +42,8 @@
     {
         "id": 5,
         "anio" : 2018,
-        "marca" : "Kappa",
         "equipo" : "Racing Club",
+        "marca" : "Kappa",
         "talla" : "XL",
         "color" : "Celeste y Blanco",   
         "precio" : 4000,
@@ -51,9 +51,9 @@
     },
     {
         "id" : 6,
-        "anio" : 2020,  
-        "marca" : "Kappa",
+        "anio" : 2020,
         "equipo" : "Racing Club",
+        "marca" : "Kappa",
         "talla" : "L",
         "color" : "Celeste y Blanco",
         "precio" : 5000,
@@ -62,8 +62,8 @@
     {
         "id" : 7,
         "anio" : 2020,
-        "marca" : "Puma",
         "equipo" : "Independiente",
+        "marca" : "Puma",
         "talla" : "XL",
         "color" : "Rojo",
         "precio" : 6000,
@@ -72,8 +72,8 @@
     {
         "id" : 8,
         "anio" : 2021,
-        "marca" : "Puma",
         "equipo" : "Independiente",
+        "marca" : "Puma",
         "talla" : "XS",
         "color" : "Rojo",
         "precio" : 4320,
@@ -82,8 +82,8 @@
     {
         "id" : 9,
         "anio" : 2022,
-        "marca" : "Nike",
         "equipo" : "San Lorenzo",
+        "marca" : "Nike",
         "talla" : "L",
         "color" : "Rojo y Blanco",
         "precio" : 7000,

@@ -31,10 +31,11 @@ const cargarLote = async() => {
     const data = await res.json()
     console.log(data)
     for(let camiseta of data){
-        let camisetaCreada = new Camiseta(camiseta.id, camiseta.anio, camiseta.equipo, camiseta.marca, camiseta.talla, camiseta.color, camiseta.precio, camiseta.imagen)
+        let camisetaCreada = new Camiseta(camiseta.id, camiseta.anio, camiseta.marca, camiseta.equipo, camiseta.talla, camiseta.color, camiseta.precio, camiseta.imagen)
         lote2022.push(camisetaCreada)
     }
     localStorage.setItem("lote", JSON.stringify(lote2022))
+    console.log(lote2022)
 }
 
 
@@ -320,19 +321,19 @@ function finalizarCompra(lote){
     Swal.fire({
         title: '¿Está seguro de finalizar la compra?',
         icon: 'info',
+        iconColor: '#f7b500',   
         showCancelButton: true,
         confirmButtonText: 'Sí',
         cancelButtonText: 'No',
-        confirmButtonColor: '#3085d6',
+        confirmButtonColor: '#BB86FC',
         cancelButtonColor: '#F78E69',
     }).then((result)=>{
         if(result.isConfirmed){
-            let totalFinal = compraTotal(lote)
             Swal.fire({
                 title: 'Compra realizada con éxito',
                 icon: 'success',
-                confirmButtonColor: '#3085d6',
-                text: `Gracias por su compra. El total de su compra es ${totalFinal} y se ha realizado el dia ${fecha}`
+                confirmButtonColor: '#BB86FC',
+                text: `Gracias por su compra. La misma se ha realizado el dia ${fecha}`
             })
             productosEnCarrito = [];
             localStorage.removeItem("carrito");
@@ -340,14 +341,13 @@ function finalizarCompra(lote){
                 Swal.fire({
                     title: 'Compra cancelada',
                     icon: 'info',
-                    confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#f7b500',
                     text: 'Sus productos siguen en el carrito',
                     timer: 3000,
                 })
             }
         })
 }
-
 
 
 //Inicio
@@ -358,16 +358,6 @@ setTimeout(()=>{
 
 }, 1000)
 
-
-//Mostrar y oculta carga de camisetas
-//------------Necesito que no aparezca el modal si la clave es incorrecta--------------------------
-// btnCargarCamiseta.addEventListener("click", () => {
-//     passAdmin() == true ? alert("Bienvenido administrador") : alert("Clave incorrecta, no se puede realizar la operación.")
-// });
-
-
-//CORREGIR QUE MUESTRE VALOR DE COMPRA TOTAL //REVISAR
-//ELIMINAR
 
 
 
