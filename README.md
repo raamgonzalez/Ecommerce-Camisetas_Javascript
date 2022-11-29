@@ -5,8 +5,8 @@ Desde una consola o el bash de git usar el siguiente comando:
 - git clone https://github.com/raamgonzalez/ProyectoFinal-Gonzalez.git
 
 ## Contenido del E-commerce / explicación del proyecto ##
-1. Se genera un archivo index.html 
-2. Se cargan los scripts de JavaScript y se agregan los CDN correspondientes a las frameworks a utilizar.
+1. Se crea una web con el objeto de vender camisetas de futbol de equipos de la liga Argentina y exterior.
+2. La web contiene un muestrario de camisetas pero se pueden cargas mas sumado a que tambien se pueden consultar y ordenar.
 
 ## Funcionalidades ##
 ### Contenidos desarollados en la Entrega ###
