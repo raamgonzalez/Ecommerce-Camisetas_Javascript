@@ -2,7 +2,7 @@
 
 ## Descarga ##
 Desde una consola o el bash de git usar el siguiente comando:
-- git clone https://github.com/raamgonzalez/simuladorInteractivo__GonzalezRamses.git
+- git clone https://github.com/raamgonzalez/ProyectoFinal-Gonzalez.git
 
 ## Contenido del E-commerce / explicación del proyecto ##
 1. Se genera un archivo index.html 
