@@ -5,7 +5,7 @@ Desde una consola o el bash de git usar el siguiente comando:
 - git clone https://github.com/raamgonzalez/ProyectoFinal-Gonzalez.git
 
 ## Deploy ##
-[https://creative-kashata-ad9600.netlify.app/](https://ecommerce-camisetasde1.netlify.app/)
+https://ecommerce-camisetasde1.netlify.app/
 
 ## Contenido del E-commerce / explicación del proyecto ##
 1. Se crea una web con el objeto de vender camisetas de futbol de equipos de la liga Argentina y exterior.
